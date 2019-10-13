@@ -1,0 +1,8 @@
+name: GDD-Events
+version: @version@
+main: cf.lucasmellof.gddevents.GDDEvents
+authors: [Lucasmellof]
+description: GDD-Events plugin
+commands:
+  ctop:
+
