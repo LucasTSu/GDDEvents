@@ -5,26 +5,32 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class Manager implements CommandExecutor {
+public class CalcManager implements CommandExecutor {
     GDDEvents gddEvents;
 
-    public Manager(GDDEvents gddEvents) {
+    public CalcManager(GDDEvents gddEvents) {
         this.gddEvents = gddEvents;
         gddEvents.getCommand("calc").setExecutor(this);
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        String math = String.join(" ", args);
         sender.sendMessage("§eCalculadora");
-        sender.sendMessage("§eExpressão:§f " + String.join(" ", args));
-        sender.sendMessage("§e... Calculando ...");
-        Calculator calculator = new Calculator();
-        try {
-            sender.sendMessage("§e -> Resultado: " +calculator.runner(String.join(" ", args)));
-        } catch (Exception e) {
-            sender.sendMessage("§cHouve um erro ao calcular sua expressão");
+        if(math.isEmpty() || math == null){
+            sender.sendMessage("§c ! Você precisa inserir valores para que a calculadora funcionar");
+        }else{
+            sender.sendMessage("§eExpressão:§f " + math);
+            sender.sendMessage("§e... Calculando ...");
+            Calculator calculator = new Calculator();
+            try {
+                sender.sendMessage("§e -> Resultado: " +calculator.runner(math));
+            } catch (Exception e) {
+                sender.sendMessage("§c ! Houve um erro ao calcular sua expressão");
+                e.printStackTrace();
+            }
+            sender.sendMessage("§eCalculado em §a"+ (System.currentTimeMillis() - calculator.milis)+"ms");
         }
-        sender.sendMessage("§eCalculado em §a"+ (System.currentTimeMillis() - calculator.milis)+"ms");
         return false;
     }
 }

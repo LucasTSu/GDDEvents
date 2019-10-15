@@ -5,4 +5,5 @@ authors: [Lucasmellof]
 description: GDD-Events plugin
 commands:
   ctop:
+  calc:
 

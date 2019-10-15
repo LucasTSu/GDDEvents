@@ -20,12 +20,12 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-public class Manager implements Listener, CommandExecutor {
+public class CMDManager implements Listener, CommandExecutor {
     public HashMap<String, Integer> commandtop = new HashMap<>();
     GDDEvents main;
     ConfigManager configdata;
 
-    public Manager(GDDEvents main) {
+    public CMDManager(GDDEvents main) {
         main = main;
         loadConfig();
         main.getCommand("ctop").setExecutor(this);
